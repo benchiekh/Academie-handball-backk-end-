@@ -14,17 +14,20 @@ export class PaymentsService {
 
   async create(createPaymentDto: CreatePaymentDto): Promise<Payment> {
     try {
-      const paymentData = {
-        ...createPaymentDto,
-        dueDate: new Date(createPaymentDto.dueDate),
-      };
+      const payment = new Payment();
+      payment.amount = createPaymentDto.amount;
+      payment.dueDate = new Date(createPaymentDto.dueDate);
+      payment.paymentDate = createPaymentDto.paymentDate ? new Date(createPaymentDto.paymentDate) : undefined;
+      payment.status = createPaymentDto.status as PaymentStatus || PaymentStatus.PENDING;
+      payment.type = createPaymentDto.type as PaymentType;
+      payment.description = createPaymentDto.description;
+      payment.player = { id: createPaymentDto.playerId } as any;
       
       // Vérifier que la date est valide
-      if (isNaN(paymentData.dueDate.getTime())) {
+      if (isNaN(payment.dueDate.getTime())) {
         throw new Error('Date d\'échéance invalide');
       }
       
-      const payment = this.paymentsRepository.create(paymentData);
       return this.paymentsRepository.save(payment);
     } catch (error) {
       console.error('Error creating payment:', error);
@@ -60,7 +63,7 @@ export class PaymentsService {
   }
 
   async update(id: number, updatePaymentDto: UpdatePaymentDto): Promise<Payment> {
-    await this.paymentsRepository.update(id, updatePaymentDto);
+    await this.paymentsRepository.update(id, updatePaymentDto as any);
     return this.findOne(id);
   }
 

@@ -56,7 +56,12 @@ private async createDefaultPayments(playerId: number, paymentDate?: string): Pro
 }
 
   async findAll(): Promise<Player[]> {
-    return this.playersRepository.find({ relations: ['parent', 'payments'] });
+    console.log('=== PlayersService.findAll called ===');
+    const players = await this.playersRepository.find({ relations: ['parent', 'payments'] });
+    console.log('Players found:', players.length);
+    console.log('First player:', players[0]);
+    console.log('First player payments:', players[0]?.payments);
+    return players;
   }
 
   async findOne(id: number): Promise<Player> {

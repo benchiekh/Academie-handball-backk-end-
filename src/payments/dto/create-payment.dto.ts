@@ -1,24 +1,32 @@
-import { IsNumber, IsDateString, IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsDateString, IsEnum, IsOptional, IsString, IsNotEmpty } from 'class-validator';
 import { PaymentStatus, PaymentType } from '../entities/payment.entity';
 
 export class CreatePaymentDto {
   @IsNumber()
+  @IsNotEmpty()
   amount: number;
 
-  @IsDateString()
+  @IsString()
+  @IsNotEmpty()
   dueDate: string;
 
-  @IsOptional()
-  @IsEnum(PaymentStatus)
-  status?: PaymentStatus;
-
-  @IsEnum(PaymentType)
-  type: PaymentType;
-
-  @IsOptional()
   @IsString()
+  @IsOptional()
+  paymentDate?: string;
+
+  @IsString()
+  @IsOptional()
+  status?: 'pending' | 'paid' | 'overdue';
+
+  @IsString()
+  @IsNotEmpty()
+  type: 'monthly' | 'competition' | 'equipment';
+
+  @IsString()
+  @IsOptional()
   description?: string;
 
   @IsNumber()
+  @IsNotEmpty()
   playerId: number;
 }
