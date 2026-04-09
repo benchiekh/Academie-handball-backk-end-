@@ -18,8 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "jsxFactory": "React.createElement"
+    "jsx": "react-jsx"
   },
   "include": [
     "src"

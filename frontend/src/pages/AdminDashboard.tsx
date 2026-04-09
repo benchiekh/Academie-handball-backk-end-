@@ -4,7 +4,6 @@ import { User, Player, Payment, Stats } from '../types';
 import { usersAPI, playersAPI, paymentsAPI } from '../services/api';
 import AddParentForm from '../components/AddParentForm';
 import AddChildModal from '../components/AddChildModal';
-import AddPlayerAdminForm from '../components/AddPlayerAdminForm';
 import AddMonthlyPaymentModal from '../components/AddMonthlyPaymentModal';
 import MarkPaymentAsPaidModal from '../components/MarkPaymentAsPaidModal';
 import { calculatePaymentInfo, formatPaymentStatus } from '../utils/paymentUtils';
@@ -13,7 +12,6 @@ const AdminDashboard: React.FC = () => {
   const { user, logout } = useAuth();
   const [stats, setStats] = useState<Stats>({ total: 0, active: 0, inactive: 0 });
   const [players, setPlayers] = useState<Player[]>([]);
-  const [payments, setPayments] = useState<Payment[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [activeTab, setActiveTab] = useState<'overview' | 'players' | 'monthly' | 'users' | 'add-parent'>('overview');
   const [isLoading, setIsLoading] = useState(true);
@@ -23,8 +21,8 @@ const AdminDashboard: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [paymentModalMonth, setPaymentModalMonth] = useState<string>('');
-  const [showMarkPaidModal, setShowMarkPaidModal] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
+    const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
+    const [showMarkPaidModal, setShowMarkPaidModal] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -54,7 +52,6 @@ const AdminDashboard: React.FC = () => {
 
       setStats({ ...playersStats, ...paymentsStats });
       setPlayers(enrichedPlayers);
-      setPayments(paymentsData);
       setUsers(usersData);
     } catch (error) {
       console.error('Error loading data:', error);

@@ -1,4 +1,4 @@
-import { Player, Payment } from '../types';
+import { Player } from '../types';
 
 export const calculatePaymentInfo = (player: Player): {
   lastPaymentDate?: string;

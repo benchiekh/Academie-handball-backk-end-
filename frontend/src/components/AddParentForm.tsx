@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { usersAPI, playersAPI, paymentsAPI } from '../services/api';
+import { usersAPI, playersAPI } from '../services/api';
 
 interface ParentFormData {
   username: string;
