@@ -1,21 +1,9 @@
 {
   "version": 2,
-  "name": "academie-frontend",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "https://srv-d7b3fdggjchc73a4ve4g.onrender.com/api/$1"
-    }
-  ],
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "build",
+  "installCommand": "npm install",
+  "framework": "create-react-app",
   "env": {
     "REACT_APP_API_URL": "https://srv-d7b3fdggjchc73a4ve4g.onrender.com"
   }
